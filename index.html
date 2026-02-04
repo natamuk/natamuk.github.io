@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chan For Yu | IT Portfolio 2026</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Roboto+Mono&display=swap" rel="stylesheet">
+
+    <style>
+        /* ===================== LIGHT THEME ===================== */
+        [data-theme="light"] {
+            --bg: #f8fafc;
+            --text: #0f172a;
+            --primary: #2563eb;
+            --secondary: #7c3aed;
+            --accent: #06b6d4;
+            --card-bg: #ffffff;
+            --glass-bg: rgba(255,255,255,0.75);
+            --glow: rgba(37,99,235,0.35);
+            --grid: rgba(0,0,0,0.05);
+        }
+
+        /* ===================== DARK THEME ===================== */
+        [data-theme="dark"] {
+            --bg: #0b1120;
+            --text: #e2e8f0;
+            --primary: #00d4ff;
+            --secondary: #8b5cf6;
+            --accent: #22d3ee;
+            --card-bg: rgba(15,23,42,0.85);
+            --glass-bg: rgba(255,255,255,0.06);
+            --glow: rgba(0,212,255,0.6);
+            --grid: rgba(255,255,255,0.04);
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            transition: background 0.6s, color 0.6s;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background-image:
+                linear-gradient(var(--grid) 1px, transparent 1px),
+                linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+            background-size: 60px 60px;
+            z-index: -2;
+        }
+        body::after {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background: radial-gradient(circle at 20% 20%, var(--glow), transparent 40%),
+                        radial-gradient(circle at 80% 30%, rgba(139,92,246,0.18), transparent 45%),
+                        radial-gradient(circle at 50% 90%, rgba(34,211,238,0.15), transparent 50%);
+            z-index: -1;
+            transition: all 0.6s;
+        }
+
+        .navbar { backdrop-filter: blur(12px); border-bottom: 1px solid rgba(0,0,0,0.08); }
+
+        .hero {
+            padding: 220px 0 160px;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(37,99,235,0.12), rgba(124,58,237,0.12));
+        }
+
+        .hero-avatar-wrap {
+            display: inline-block;
+            padding: 10px;
+            border-radius: 50%;
+            background: conic-gradient(from 180deg, var(--primary), var(--secondary), var(--accent), var(--primary));
+            box-shadow: 0 0 60px var(--glow), 0 0 120px rgba(139,92,246,0.35);
+            animation: float 6s ease-in-out infinite;
+        }
+        .hero-avatar {
+            width: 260px;
+            border-radius: 50%;
+            border: 8px solid rgba(255,255,255,0.3);
+            box-shadow: 0 30px 70px rgba(0,0,0,0.35);
+        }
+
+        .hero-name {
+            font-size: clamp(3rem, 5vw, 5rem);
+            font-weight: 800;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            background: linear-gradient(90deg, #fff, var(--accent), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 30px var(--glow);
+        }
+
+        .hero-subtitle {
+            font-family: 'Roboto Mono', monospace;
+            color: #475569;
+            font-size: 1.2rem;
+        }
+        [data-theme="dark"] .hero-subtitle { color: #cbd5f5; }
+
+        .glow-btn {
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            color: #fff;
+            border: none;
+            box-shadow: 0 10px 30px var(--glow);
+            transition: transform .3s ease, box-shadow .3s ease;
+        }
+        .glow-btn:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px var(--glow);
+        }
+
+        @keyframes float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-12px); } }
+
+        .section-title {
+            font-weight: 700;
+            position: relative;
+            display: inline-block;
+        }
+        .section-title::after {
+            content: '';
+            width: 110px; height: 5px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            position: absolute; bottom: -12px; left: 50%; transform: translateX(-50%);
+            border-radius: 3px;
+            box-shadow: 0 0 20px var(--glow);
+        }
+
+        .glass {
+            background: var(--glass-bg);
+            border: 1px solid rgba(255,255,255,0.12);
+            backdrop-filter: blur(12px);
+            border-radius: 20px;
+        }
+
+        .card {
+            border: none;
+            border-radius: 16px;
+            overflow: hidden;
+            transition: all 0.4s;
+            background: var(--card-bg);
+            color: var(--text);
+        }
+        .card:hover { transform: translateY(-10px) scale(1.03); box-shadow: 0 20px 40px rgba(0,0,0,0.25); }
+
+        .skill-icon { font-size: 2.5rem; margin-bottom: 10px; color: var(--primary); }
+        .progress { height: 12px; border-radius: 10px; background: rgba(0,0,0,0.1); }
+        [data-theme="dark"] .progress { background: rgba(255,255,255,0.1); }
+
+        .timeline { position: relative; max-width: 1200px; margin: 0 auto; }
+        .timeline::after { content: ''; position: absolute; width: 6px; background: var(--primary); top: 0; bottom: 0; left: 50%; margin-left: -3px; }
+        .timeline-item { padding: 10px 40px; position: relative; background-color: inherit; width: 50%; }
+        .timeline-item::after { content: ''; position: absolute; width: 25px; height: 25px; right: -17px; background-color: var(--bg); border: 4px solid var(--primary); top: 15px; border-radius: 50%; z-index: 1; }
+        .left { left: 0; }
+        .right { left: 50%; }
+        .right::after { left: -16px; }
+
+        @media (max-width: 768px) {
+            .timeline::after { left: 31px; }
+            .timeline-item { width: 100%; padding-left: 70px; padding-right: 25px; }
+            .timeline-item::after { left: 15px; }
+            .right { left: 0%; }
+        }
+    </style>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg fixed-top" id="mainNav">
+    <div class="container">
+        <a class="navbar-brand fw-bold" href="#">Chan For Yu</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+                <li class="nav-item"><a class="nav-link" href="#skills">Skills</a></li>
+                <li class="nav-item"><a class="nav-link" href="#projects">Projects</a></li>
+                <li class="nav-item"><a class="nav-link" href="#career">Goals</a></li>
+                <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+            </ul>
+            <span class="dark-mode-toggle ms-3" id="themeToggle"><i class="fas fa-sun"></i></span>
+        </div>
+    </div>
+</nav>
+
+<section class="hero text-center">
+    <div class="container position-relative">
+        <div class="hero-avatar-wrap mb-4">
+            <img src="images.jpg" alt="Chan For Yu" class="hero-avatar">
+        </div>
+        <h1 class="hero-name mb-4">Chan For Yu</h1>
+        <p class="hero-subtitle">Hong Kong Institute of Information Technology | Higher Diploma in Software Engineering | Fresh Graduate</p>
+        <p class="fs-5">Junior Programmer • Java • Python • SQL • Passionate Problem Solver</p>
+        <a href="#about" class="btn glow-btn btn-lg mt-4 px-5">Explore More</a>
+    </div>
+</section>
+
+<section id="about" class="py-5">
+    <div class="container">
+        <h2 class="section-title text-center mb-5">About Me</h2>
+        <div class="row justify-content-center">
+            <div class="col-lg-9 text-center glass p-5 shadow">
+                <p class="lead">I am Chan For Yu, a fresh graduate passionate about programming. Through my academic projects, I have gained solid experience in Java, Python, and SQL, and completed multiple end-to-end projects from analysis to deployment.</p>
+                <p>In high school, I created a campus event management app that solved real scheduling issues and earned teacher recommendations. I am a fast learner, detail-oriented in debugging, and enjoy teamwork. I look forward to growing in the tech industry and contributing value.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="skills" class="py-5">
+    <div class="container">
+        <h2 class="section-title text-center mb-5">Core Skills</h2>
+        <div class="row g-4 text-center">
+            <div class="col-md-4"><div class="card h-100 shadow"><div class="card-body"><i class="fab fa-java skill-icon"></i><h4>Java Development</h4><div class="progress mt-3"><div class="progress-bar" style="width:92%">92%</div></div></div></div></div>
+            <div class="col-md-4"><div class="card h-100 shadow"><div class="card-body"><i class="fab fa-python skill-icon"></i><h4>Python Applications</h4><div class="progress mt-3"><div class="progress-bar" style="width:88%">88%</div></div></div></div></div>
+            <div class="col-md-4"><div class="card h-100 shadow"><div class="card-body"><i class="fas fa-database skill-icon"></i><h4>SQL Database</h4><div class="progress mt-3"><div class="progress-bar" style="width:90%">90%</div></div></div></div></div>
+        </div>
+    </div>
+</section>
+
+<section id="projects" class="py-5">
+    <div class="container">
+        <h2 class="section-title text-center mb-5">Projects & Proof</h2>
+        <div class="row g-4">
+            <div class="col-md-6 col-lg-4"><div class="card shadow"><img src="456.png" class="card-img-top"><div class="card-body"><h5>School Event Management App</h5><p>Built with Python + Tkinter to solve scheduling issues, recommended by teachers.</p></div></div></div>
+            <div class="col-md-6 col-lg-4"><div class="card shadow"><img src="789.png" class="card-img-top"><div class="card-body"><h5>Database Fundamentals Certificate</h5><p>Strong in ER diagrams, SQL queries, and performance tuning.</p></div></div></div>
+            <div class="col-md-6 col-lg-4"><div class="card shadow"><img src="123.png" class="card-img-top"><div class="card-body"><h5>System Development Project</h5><p>Java Spring Boot + MySQL full CRUD application.</p></div></div></div>
+        </div>
+    </div>
+</section>
+
+<section id="career" class="py-5">
+    <div class="container">
+        <h2 class="section-title text-center mb-5">Career Goals & Plan</h2>
+        <div class="row">
+            <div class="col-md-5">
+                <h4>Career Goals</h4>
+                <p>Short-term: Become a strong Junior Programmer and build hands-on experience.<br>Long-term: Grow into a Senior Engineer, focus on backend/full-stack, and contribute to large-scale projects.</p>
+            </div>
+            <div class="col-md-7">
+                <div class="timeline">
+                    <div class="timeline-item left"><div class="card shadow"><div class="card-body"><h5>2026</h5><p>Graduate & Start as Junior Programmer</p></div></div></div>
+                    <div class="timeline-item right"><div class="card shadow"><div class="card-body"><h5>2026-2027</h5><p>Internship/Work + Learn React / Cloud</p></div></div></div>
+                    <div class="timeline-item left"><div class="card shadow"><div class="card-body"><h5>2028+</h5><p>Promotion & Lead a Small Team</p></div></div></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="contact" class="py-5">
+    <div class="container text-center">
+        <h2 class="section-title mb-5">Contact Me</h2>
+        <p class="lead">For job opportunities, collaboration, or technical discussions, feel free to reach out!</p>
+        <div class="d-flex justify-content-center gap-4 fs-3">
+            <a href="mailto:your@email.com"><i class="fas fa-envelope"></i></a>
+            <a href="#"><i class="fab fa-linkedin"></i></a>
+            <a href="#"><i class="fab fa-github"></i></a>
+        </div>
+    </div>
+</section>
+
+<footer class="bg-dark text-white text-center py-4">
+    <p>© 2026 Chan For Yu | Built with passion & code</p>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    const toggle = document.getElementById('themeToggle');
+    const html = document.documentElement;
+
+    toggle.addEventListener('click', () => {
+        const current = html.getAttribute('data-theme');
+        if (current === 'dark') {
+            html.setAttribute('data-theme', 'light');
+            toggle.innerHTML = '<i class="fas fa-sun"></i>';
+        } else {
+            html.setAttribute('data-theme', 'dark');
+            toggle.innerHTML = '<i class="fas fa-moon"></i>';
+        }
+    });
+</script>
+</body>
+</html>
